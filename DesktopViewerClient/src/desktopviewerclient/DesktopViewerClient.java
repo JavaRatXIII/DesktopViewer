@@ -30,10 +30,6 @@ public class DesktopViewerClient {
 				System.out.println("Connecting to the Server");
 				//Authenticate class is responsible for security purposes
 				Authenticate frame1= new Authenticate(sc);
-	
-				frame1.setSize(300,80);
-				frame1.setLocation(500,300);
-				frame1.setVisible(true);
 			} catch (Exception ex){
 				ex.printStackTrace();
 			}
