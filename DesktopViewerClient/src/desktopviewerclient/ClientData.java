@@ -1,12 +1,10 @@
 package desktopviewerclient;
 
 import java.io.DataInputStream;
-
 import java.io.DataOutputStream;
-
 import java.io.IOException;
-
 import java.net.Socket;
+import Console.*;
 
 class ClientData
 {
@@ -33,7 +31,7 @@ class ClientData
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            new Console().WriteLine(e.getMessage());
         }
 
         try
@@ -43,7 +41,7 @@ class ClientData
         }
         catch (IOException e)
         {
-            e.printStackTrace();		
+            new Console().WriteLine(e.getMessage());		
         }
         CreateFrame abc= new CreateFrame(_connectionSocket,width,height);
     }			

@@ -13,7 +13,8 @@ import java.util.zip.*;
 import java.io.IOException;
 
 class CreateFrame extends Thread {
-	String width="", height="";
+	public String width="";
+        public String height="";
 	private JFrame frame = new JFrame();
 
 	//JDesktopPane represents the main container that will contain all connected clients' screens
