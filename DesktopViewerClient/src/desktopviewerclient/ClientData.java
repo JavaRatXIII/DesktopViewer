@@ -43,7 +43,7 @@ class ClientData
         {
             new Console().WriteLine(e.getMessage());		
         }
-        CreateFrame abc= new CreateFrame(_connectionSocket,width,height);
+        CreateClientFrame abc= new CreateClientFrame(_connectionSocket,width,height);
     }			
 }
 

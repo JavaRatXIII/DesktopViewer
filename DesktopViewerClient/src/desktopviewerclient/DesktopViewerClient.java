@@ -21,14 +21,14 @@ public class DesktopViewerClient
         new DesktopViewerClient().initialize(ip, Integer.parseInt(port));
     }
 
-    public void initialize(String ip, int port)
+    public void initialize(String IP, int port)
     {
         try
         {
-            Socket sc = new Socket(ip,port);
+            Socket connectionSocket = new Socket(IP,port);
             System.out.println("Connecting to the Server");
             //ClientData finds clients PC data
-            ClientData frame1= new ClientData(sc);
+            ClientData frame1= new ClientData(connectionSocket);
         } 
         catch (Exception ex)
         {
