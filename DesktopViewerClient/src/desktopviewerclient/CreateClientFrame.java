@@ -4,10 +4,7 @@ import java.awt.BorderLayout;
 import java.beans.PropertyVetoException;
 import java.io.InputStream;
 import java.net.Socket;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import Console.*;
 
 import java.io.IOException;
@@ -22,11 +19,11 @@ class CreateClientFrame extends Thread
     private JInternalFrame _inerFrame = new JInternalFrame("Server Screen", true, true, true);
     private JPanel _panel = new JPanel();
 
-    public CreateClientFrame(Socket cSocket, String w, String h) 
+    public CreateClientFrame(Socket socket, String w, String h) 
     {
         width = w;
         height = h;
-        _connectionSocket = cSocket;
+        _connectionSocket = socket;
         start();
     }
 
@@ -53,6 +50,7 @@ class CreateClientFrame extends Thread
         _inerFrame.setVisible(true);
     }
 
+    @Override
     public void run() 
     {
         InputStream in = null;
@@ -64,10 +62,10 @@ class CreateClientFrame extends Thread
         }
         catch (IOException ex)
         {
-            ex.printStackTrace();
+            new Console().WriteLine(ex.getMessage());
         }
 
-        new ReceiveScreen(in,_panel);
-        new SendEvents(_connectionSocket,_panel,width,height);
+        new ClientScreen(in,_panel);
+        new SendClientEvents(_connectionSocket,_panel,width,height);
     }
 }

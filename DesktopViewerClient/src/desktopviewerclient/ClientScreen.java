@@ -1,7 +1,6 @@
 package desktopviewerclient;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,13 +8,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import Console.*;
 
-class ReceiveScreen extends Thread
+class ClientScreen extends Thread
 {
     private JPanel _clientPanel = null;
     private InputStream _clinetInput = null;
     private Image _clientImage = null;
 
-    public ReceiveScreen(InputStream input,JPanel clientPanel){
+    public ClientScreen(InputStream input,JPanel clientPanel){
         _clinetInput = input;
         _clientPanel = clientPanel;
         start();
