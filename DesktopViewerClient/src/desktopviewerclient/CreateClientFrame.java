@@ -34,7 +34,7 @@ class CreateClientFrame extends Thread
     {
         _desktopFrame.add(_desktop, BorderLayout.CENTER);
         _desktopFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        _desktopFrame.setExtendedState(_desktopFrame.getExtendedState()|JFrame.MAXIMIZED_BOTH);	
+        _desktopFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         _desktopFrame.setVisible(true);
 
         _inerFrame.setLayout(new BorderLayout());
