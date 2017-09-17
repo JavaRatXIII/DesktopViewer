@@ -29,7 +29,7 @@ class ClientScreen extends Thread
                 byte[] bytes = new byte[1024*1024];
                 int count = 0;
                 
-                while(!(count>4 && bytes[count-2]==(byte)-1 && bytes[count-1]==(byte)-39))
+                while(!(count > 4 && bytes[count-2] == (byte) - 1 && bytes[count-1] == (byte) - 39))
                 {
                     count+=_clinetInput.read(bytes,count,bytes.length-count);
                 }

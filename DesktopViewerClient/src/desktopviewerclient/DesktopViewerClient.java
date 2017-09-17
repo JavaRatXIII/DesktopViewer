@@ -10,25 +10,22 @@ import Console.*;
  */
 public class DesktopViewerClient 
 {
-    static String port = "1204";
-
     /**
      * @param args the command line arguments
      */
     public static void main(String args[])
     {
         String ip = JOptionPane.showInputDialog("Please enter server ip");
-        new DesktopViewerClient().initialize(ip, Integer.parseInt(port));
+        new DesktopViewerClient().initialize(ip);
     }
 
-    public void initialize(String IP, int port)
+    public void initialize(String IP)
     {
         try
         {
-            Socket connectionSocket = new Socket(IP,port);
+            Socket connectionSocket = new Socket(IP,1204);
             System.out.println("Connecting to the Server");
-            //ClientData finds clients PC data
-            ClientData frame1= new ClientData(connectionSocket);
+            ClientData frame1 = new ClientData(connectionSocket);
         } 
         catch (Exception ex)
         {

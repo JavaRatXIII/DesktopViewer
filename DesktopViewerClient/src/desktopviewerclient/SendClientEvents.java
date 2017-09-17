@@ -23,8 +23,8 @@ class SendClientEvents implements KeyListener, MouseMotionListener, MouseListene
         _clientPanel = panel;
         width = w;
         height = h;
-        _width = Double.valueOf(w.trim());
-        _height = Double.valueOf(w.trim());
+        _width = Double.parseDouble(w.trim());
+        _height = Double.parseDouble(w.trim());
 
         _clientPanel.addKeyListener(this);
         _clientPanel.addMouseListener(this);
@@ -63,8 +63,9 @@ class SendClientEvents implements KeyListener, MouseMotionListener, MouseListene
         _writer.println(-1);
         int button = e.getButton();
         int xButton = 16;
-        if(button==3){
-                xButton = 4;
+        if(button==3)
+        {
+            xButton = 4;
         }
         _writer.println(xButton);
         _writer.flush();
@@ -76,8 +77,9 @@ class SendClientEvents implements KeyListener, MouseMotionListener, MouseListene
         _writer.println(-2);
         int button = e.getButton();
         int xButton = 16;
-        if(button==3){
-                xButton = 4;
+        if(button==3)
+        {
+            xButton = 4;
         }
         _writer.println(xButton);
         _writer.flush();

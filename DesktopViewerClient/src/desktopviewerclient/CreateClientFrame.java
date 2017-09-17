@@ -11,8 +11,8 @@ import java.io.IOException;
 
 class CreateClientFrame extends Thread 
 {
-    public String width="";
-    public String height="";
+    public String width = "";
+    public String height = "";
     private JFrame _desktopFrame = new JFrame();
     private JDesktopPane _desktop = new JDesktopPane();
     private Socket _connectionSocket = null;
@@ -41,7 +41,8 @@ class CreateClientFrame extends Thread
         try 
         {
             _inerFrame.setMaximum(true);
-        }catch(PropertyVetoException ex) 
+        }
+        catch(PropertyVetoException ex) 
         { 
              new Console().WriteLine(ex.getMessage());
         }
