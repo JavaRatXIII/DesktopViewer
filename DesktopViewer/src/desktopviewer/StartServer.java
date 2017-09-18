@@ -45,7 +45,7 @@ public class StartServer
                 _outPutStream.writeUTF("valid");
                 _outPutStream.writeUTF(width);
                 _outPutStream.writeUTF(height);
-                new SendScreen(socket,robot,rectangle);
+                new SendClientScreen(socket,robot,rectangle);
                 new ReceiveEvents(socket,robot);
             }
         }
