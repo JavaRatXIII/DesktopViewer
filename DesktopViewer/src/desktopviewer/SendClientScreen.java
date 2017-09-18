@@ -7,49 +7,48 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 import javax.imageio.ImageIO;
-import Console.*;
 
-class SendClientScreen extends Thread
-{
-    Socket _serverSocket = null;
-    Robot _screenCapturer = null;
-    Rectangle _screen = null;
-    OutputStream _outputStream = null;
 
-    public SendClientScreen(Socket socket,Robot robot,Rectangle rectangle) 
-    {
-        _serverSocket = socket;
-        _screenCapturer = robot;
-        _screen = rectangle;
-        start();
-    }
+class SendClientScreen extends Thread{
 
-    public void run()
-    {
-        try
-        {
-            _outputStream = _serverSocket.getOutputStream();
-        }
-        catch(IOException ex)
-        {
-            new Console().WriteLine(ex.getMessage());
-        }
+	Socket socket=null;
+	Robot robot=null;
+	Rectangle rectangle=null;
+	boolean continueLoop=true;
+	
+	OutputStream oos=null;
 
-        while(true)
-        {
-            BufferedImage image=_screenCapturer.createScreenCapture(_screen);
+	public SendClientScreen(Socket socket,Robot robot,Rectangle rect) {
+	this.socket=socket;
+	this.robot=robot;
+	rectangle=rect;
+	start();
+	}
 
-            try
-            {
-                ImageIO.write(image,"jpeg",_outputStream);
-                Thread.sleep(10);
-            }
-            catch(IOException | InterruptedException ex)
-            {
-                new Console().WriteLine(ex.getMessage());
-                break;
-            }
-        }
-    }
+	public void run(){
+	
+		try{
+	oos=socket.getOutputStream();
+	
+	}catch(IOException ex){
+		ex.printStackTrace();
+	}
+
+	while(continueLoop){
+	BufferedImage image=robot.createScreenCapture(rectangle);
+
+	try{
+		ImageIO.write(image,"jpeg",oos);
+	}catch(IOException ex){
+		ex.printStackTrace();
+	}
+	
+	try{
+		Thread.sleep(10);
+	}catch(InterruptedException e){
+		e.printStackTrace();
+	}
+	}
+	}
 }
 

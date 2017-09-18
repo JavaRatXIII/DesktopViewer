@@ -1,57 +1,67 @@
 package desktopviewer;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.GraphicsDevice;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import Console.*;
+import javax.swing.*;
 
-/**
- *
- * @author Jun
- */
-public class StartServer
-{	
-    private ServerSocket _serverSocket = null;
-    private DataOutputStream _outPutStream = null;
-    private IConsole _console;
-    public String width="";
-    public String height="";
+public class StartServer{
+		
+	ServerSocket socket = null;
+	DataInputStream password = null;
+	DataOutputStream verify = null;
+	String width="";
+	String height="";
+			
+	StartServer(int port){
+		Robot robot = null;
+		Rectangle rectangle = null;
+		try{
+			System.out.println("Awaiting Connection from Client");
+			socket=new ServerSocket(port);
+			
+			GraphicsEnvironment gEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			GraphicsDevice gDev = gEnv.getDefaultScreenDevice();
+	
+			Dimension dim=Toolkit.getDefaultToolkit().getScreenSize();
+			String width=""+dim.getWidth();
+			String height=""+dim.getHeight();
+			rectangle=new Rectangle(dim);
+			robot=new Robot(gDev);
 
-    StartServer(int port)
-    {
-        _console = new Console();
-        
-        Robot robot = null;
-        Rectangle rectangle = null;
-        try
-        {
-            _console.WriteLine("Awaiting Connection from Client");
-            _serverSocket = new ServerSocket(port);
+			drawGUI();
 
-            GraphicsEnvironment graphicEnviroment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            GraphicsDevice graphicDevice = graphicEnviroment.getDefaultScreenDevice();
+			while(true){
+				Socket sc=socket.accept();
+				password=new DataInputStream(sc.getInputStream());
+				verify=new DataOutputStream(sc.getOutputStream());
+				//String username=password.readUTF();
+				String pssword=password.readUTF();
+				pssword = "";
+				if(pssword.equals("")){
+					verify.writeUTF("valid");
+					verify.writeUTF(width);
+					verify.writeUTF(height);
+					new SendClientScreen(sc,robot,rectangle);
+					new ReceiveEvents(sc,robot);}
+				else{
+					verify.writeUTF("Invalid");
+				}
+			}
+		}catch (Exception ex){
+			ex.printStackTrace();
+		}
+	}
+			
+	private void drawGUI(){
+	}
 
-            Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-            width = "" + dimension.getWidth();
-            height = "" + dimension.getHeight();
-            rectangle = new Rectangle(dimension);
-            robot = new Robot(graphicDevice);
-
-            while(true)
-            {
-                Socket socket =_serverSocket.accept();
-                _outPutStream = new DataOutputStream(socket.getOutputStream());
-                _outPutStream.writeUTF("valid");
-                _outPutStream.writeUTF(width);
-                _outPutStream.writeUTF(height);
-                new SendClientScreen(socket,robot,rectangle);
-                new ReceiveEvents(socket,robot);
-            }
-        }
-        catch (Exception ex)
-        {
-             _console.WriteLine(ex.getMessage());
-        }
-    }
 }
