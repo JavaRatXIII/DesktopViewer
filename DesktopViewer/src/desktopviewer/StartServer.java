@@ -9,12 +9,12 @@ import Console.*;
 
 public class StartServer
 {	
-    ServerSocket _serverSocket = null;
-    DataInputStream _inPutStream = null;
-    DataOutputStream _outPutStream = null;
+    private ServerSocket _serverSocket = null;
+    private DataInputStream _inPutStream = null;
+    private DataOutputStream _outPutStream = null;
     private IConsole _console;
-    String width = "";
-    String height = "";
+    public String width = "";
+    public String height = "";
 
     StartServer(int port)
     {
