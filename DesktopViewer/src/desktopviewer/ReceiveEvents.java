@@ -30,18 +30,23 @@ class ReceiveEvents extends Thread{
 			int command = scanner.nextInt();
 			switch(command){
 					case-1:
+                                            //System.out.println(command+" mouse press "+ scanner.nextInt());
 					robot.mousePress(scanner.nextInt());
 					break;
 					case-2:
+                                            //System.out.println(command+" mouse release "+ scanner.nextInt());
 					robot.mouseRelease(scanner.nextInt());
 					break;
 					case-3:
+                                            //System.out.println(command+" key press "+ scanner.nextInt());
 					robot.keyPress(scanner.nextInt());
 					break;
 					case-4:
+                                            //System.out.println(command+" mouse release "+ scanner.nextInt());
 					robot.keyRelease(scanner.nextInt());
 					break;
 					case-5:
+                                            //System.out.println(command+" mouse move "+ scanner.nextInt());
 					robot.mouseMove(scanner.nextInt(),scanner.nextInt());
 					break;
 					}
