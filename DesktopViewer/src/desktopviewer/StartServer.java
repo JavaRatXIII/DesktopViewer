@@ -46,7 +46,7 @@ public class StartServer
                 _outPutStream.writeUTF(width);
                 _outPutStream.writeUTF(height);
                 new SendClientScreen(sc,robot,rectangle);
-                new ReceiveEvents(sc,robot);
+                new ReceiveClientEvents(sc,robot);
             }
         }
         catch (Exception ex)

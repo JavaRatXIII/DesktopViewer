@@ -6,12 +6,12 @@ import java.net.Socket;
 import java.util.Scanner;
 import Console.*;
 
-class ReceiveEvents extends Thread
+class ReceiveClientEvents extends Thread
 {
     private Socket _serverSocket= null;
     private Robot _robot = null;
 
-    public ReceiveEvents(Socket socket, Robot robot)
+    public ReceiveClientEvents(Socket socket, Robot robot)
     {
         _serverSocket = socket;
         _robot = robot;
