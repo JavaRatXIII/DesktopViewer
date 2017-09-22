@@ -3,6 +3,7 @@ package desktopviewerclient;
 import java.net.Socket;
 import javax.swing.JOptionPane;
 import Console.*;
+import Utilities.SocketFactory;
 
 /**
  *
@@ -23,7 +24,7 @@ public class DesktopViewerClient
     {
         try
         {
-            Socket connectionSocket = new Socket(IP,1204);
+            Socket connectionSocket = new SocketFactory().getClientSocket(IP);
             System.out.println("Connecting to the Server");
             ClientData frame1 = new ClientData(connectionSocket);
         } 
