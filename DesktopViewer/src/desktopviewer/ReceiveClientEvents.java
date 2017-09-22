@@ -47,7 +47,7 @@ class ReceiveClientEvents extends Thread
                 }
             }
         }
-        catch(IOException ex)
+        catch(Exception ex)
         {
             new Console().WriteLine(ex.getMessage());
         }

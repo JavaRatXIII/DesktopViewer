@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import Console.*;
+import Interfaces.ISocketFactory;
 
 public class StartServer
 {	
@@ -16,7 +17,7 @@ public class StartServer
     public String width = "";
     public String height = "";
 
-    StartServer(int port)
+    StartServer(ISocketFactory socketFactory)
     {
         _console = new Console();
         Robot robot = null;
@@ -25,7 +26,7 @@ public class StartServer
         try
         {
             _console.WriteLine("Awaiting Client Connection");
-            _serverSocket = new ServerSocket(port);
+            _serverSocket = socketFactory.getServerSocket();
 
             GraphicsEnvironment graphicEnviroment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice graphicDevice = graphicEnviroment.getDefaultScreenDevice();
@@ -38,9 +39,9 @@ public class StartServer
 
             while(true)
             {
-                Socket sc=_serverSocket.accept();
-                _inPutStream=new DataInputStream(sc.getInputStream());
-                _outPutStream=new DataOutputStream(sc.getOutputStream());
+                Socket sc = _serverSocket.accept();
+                _inPutStream = new DataInputStream(sc.getInputStream());
+                _outPutStream = new DataOutputStream(sc.getOutputStream());
                 _inPutStream.readUTF();
                 _outPutStream.writeUTF("valid");
                 _outPutStream.writeUTF(width);
